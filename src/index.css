@@ -11,3 +11,61 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*Header component*/
+.Header h1{
+  font-size: 5rem;
+}
+
+/*Selector component*/
+.selector{
+  display: inline-flex;
+}
+
+.selection{
+  padding: 3rem 0rem 0.1rem 1rem;
+  margin: 0.5rem 1rem 1rem 0rem;
+}
+.selection button {
+  font-size: 2rem;
+  background: transparent;
+  border-style: none;
+}
+
+.underscore{
+  background-color: black;
+  width: 17rem;
+  height: 0.1rem;
+  margin-left: 19rem;
+  display: block;
+  margin-bottom: 5rem;
+}
+
+/*Cards component*/
+.Cards{
+  width: 75rem;
+  height: 47rem;
+  border-radius: 1rem;
+  
+  margin: 1rem 1rem 1rem 3rem;
+}
+
+/*Card compoenent*/
+.Card{
+  border-radius: 1rem;
+  box-shadow: grey 5px 0px 5px 5px;
+  width: 30%;
+
+}
+
+.Card img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.Card-text{
+  position: absolute; 
+}
+
+
+

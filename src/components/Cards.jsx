@@ -1,10 +1,15 @@
 import React from 'react'
-import Card from './card'
+import Card from './Card'
+import '../index.css';
 
-const Cards = () => {
+const Cards = ({cards}) => {
+
+
     return (
         <div className="Cards">
-            <Card img={} title={} txt={}/>
+           {cards.map((card, index) => (
+               <Card key={index} img={card.img} title={card.title} txt={card.txt} clickfunc={card.clickfunc}/>
+           ))}
         </div>
     )
 }
