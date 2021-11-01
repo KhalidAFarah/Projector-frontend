@@ -30,28 +30,31 @@ code {
   font-size: 2rem;
   background: transparent;
   border-style: none;
-}
 
+}
+.selection button:hover {
+  font-weight: bold;
+}
 .underscore{
-  background-color: black;
+  background-color: black ;
   width: 17rem;
   height: 0.1rem;
-  margin-left: 19rem;
+  transition: 1s;
   display: block;
   margin-bottom: 5rem;
 }
 
 /*Cards component*/
-.Cards{
+/*.Cards{
   width: 75rem;
   height: 47rem;
   border-radius: 1rem;
   
   margin: 1rem 1rem 1rem 3rem;
-}
+}*/
 
 /*Card compoenent*/
-.Card{
+/*.Card{
   border-radius: 1rem;
   box-shadow: grey 5px 0px 5px 5px;
   width: 30%;
@@ -65,7 +68,18 @@ code {
 
 .Card-text{
   position: absolute; 
+}*/
+
+.Card-body{
+  min-height: 16rem;
 }
+
+
+.card:hover{
+  transform: scale(1.05);
+}
+
+
 
 
 

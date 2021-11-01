@@ -1,7 +1,7 @@
 const Selection = (props) => {
     return (
-        <div className="selection">
-            <button onClick={props.func}>{props.txt}</button>
+        <div className="selection col-3">
+            <button onClick={props.func} className="text-start-center">{props.txt}</button>
         </div>
     )
 }
