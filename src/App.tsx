@@ -8,6 +8,7 @@ import Cards from './components/Cards';
 
 
 
+
 function App() {
 
   const [link, setLink] = useState(3);
@@ -25,7 +26,7 @@ const showExplanations = () =>{
 }
 
 const showCardInfo = () => {
-  console.log("you pressed a card, wow!")
+  console.log("you pressed a card, wow!");
 }
 const cards = [{
   img: "./testimage.PNG",

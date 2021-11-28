@@ -1,3 +1,8 @@
+:root{
+  --fire: #eb7f20;
+  --black: #333333;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +10,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
+}
+
+.background-home{
+  background-color: var(--black);
 }
 
 code {
@@ -44,7 +54,13 @@ code {
   margin-bottom: 5rem;
 }
 
+
+
 /*Cards component*/
+
+.Cards{
+  padding-top: 5rem;
+}
 /*.Cards{
   width: 75rem;
   height: 47rem;
@@ -54,6 +70,7 @@ code {
 }*/
 
 /*Card compoenent*/
+
 /*.Card{
   border-radius: 1rem;
   box-shadow: grey 5px 0px 5px 5px;
@@ -72,12 +89,22 @@ code {
 
 .Card-body{
   min-height: 16rem;
+ background-color: var(--black);
+}
+.Card-body p, .Card-body h4{
+  color: var(--fire);
 }
 
 
 .card:hover{
   transform: scale(1.05);
 }
+
+.background-cards{
+  background-color: var(--fire);
+}
+
+
 
 
 
