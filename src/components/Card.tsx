@@ -4,7 +4,7 @@ import testingimage from "../testimage.PNG";
 import { useState } from 'react';
 
 
-const Card = (props) => {
+const Card = (props:any) => {
     const [pressed, setPressed] = useState(false);
    
 
