@@ -1,5 +1,5 @@
 import Selection from './Selection';
-const Selector = (props) => {
+const Selector = (props:any) => {
     return (
         <div className="row">
         <div className="selector row justify-content-center">

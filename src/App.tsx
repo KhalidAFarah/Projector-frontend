@@ -29,7 +29,7 @@ const showCardInfo = () => {
   console.log("you pressed a card, wow!");
 }
 const cards = [{
-  img: "./testimage.PNG",
+  img: "testimage.PNG",
   title: "LOREM IPSUM",
   txt: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
   clickfunc: showCardInfo,
@@ -49,6 +49,8 @@ const cards = [{
   txt: "Lorem Ipsum. Lorem Ipsum",
   clickfunc: showCardInfo,
 }]
+
+
 
 
   return (

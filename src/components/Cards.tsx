@@ -3,7 +3,7 @@ import Card from './Card'
 import '../index.css';
 import waves from '../wave-haikei.svg'
 
-const Cards = ({cards}) => {
+const Cards = (props:any) => {
     
 
     return (
@@ -15,7 +15,7 @@ const Cards = ({cards}) => {
                     
                 </svg>
                 <div className="Cards row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-           {cards.map((card, index) => (
+           {props.cards.map((card:any, index:number) => (
                <Card key={index} img={card.img} title={card.title} txt={card.txt} clickfunc={card.clickfunc}/>
            ))}
            </div>
