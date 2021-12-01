@@ -9,7 +9,7 @@ const Card = (props:any) => {
    
 
     return (
-        <div className="Card col" style={ pressed == false ? {paddingLeft: 3+"rem", paddingRight: 3+"rem"} : {paddingLeft: 3+"rem", paddingRight: 3+"rem", transform: "scale("+100+")", transitionDuration: 1000+"ms"} } onClick={
+        <div className="Card col" style={ pressed == false ? {paddingLeft: 3+"rem", paddingRight: 3+"rem"} : {paddingLeft: 3+"rem", paddingRight: 3+"rem", transform: "scale("+100+")", transitionDuration: 1000+"ms", zIndex: 100} } onClick={
             () =>{
                 setPressed(true)
                 props.clickfunc()
