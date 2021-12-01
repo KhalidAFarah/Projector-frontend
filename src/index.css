@@ -25,6 +25,7 @@ code {
 /*Header component*/
 .Header h1{
   font-size: 5rem;
+  color: var(--fire);
 }
 
 /*Selector component*/
@@ -40,13 +41,14 @@ code {
   font-size: 2rem;
   background: transparent;
   border-style: none;
+  color: var(--fire);
 
 }
 .selection button:hover {
   font-weight: bold;
 }
 .underscore{
-  background-color: black ;
+  background-color: var(--fire) ;
   width: 17rem;
   height: 0.1rem;
   transition: 1s;
