@@ -59,7 +59,7 @@ const [pressed, setPressed] = useState(false);
     <div className="App">
 
       
-      <div style={ pressed ? {animation: "disappear", animationDuration: 1000+"ms"} : {}}>
+      <div style={ pressed ? {transition: 100+"ms", opacity: 0} : {}}>
         <Header txt="Projector.io"/>
         <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
 

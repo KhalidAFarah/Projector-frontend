@@ -110,18 +110,6 @@ code {
   background-color: var(--fire);
 }
 
-@keyframes disappear{
-  
-  0%{
-    opacity: 10%;
-  }
-  100%{
-    display: none;
-    opacity: 0%;
-  }
-}
-
-
 
 
 
