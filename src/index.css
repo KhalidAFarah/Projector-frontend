@@ -10,7 +10,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
  
+}
+html{
+  background-color: var(--black);
 }
 
 .background-home{
@@ -104,6 +108,17 @@ code {
 
 .background-cards{
   background-color: var(--fire);
+}
+
+@keyframes disappear{
+  
+  0%{
+    opacity: 10%;
+  }
+  100%{
+    display: none;
+    opacity: 0%;
+  }
 }
 
 

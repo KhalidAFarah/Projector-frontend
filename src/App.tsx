@@ -12,6 +12,7 @@ import Cards from './components/Cards';
 function App() {
 
   const [link, setLink] = useState(3);
+  
 
 //First selector
 const showPrograms = () =>{
@@ -50,17 +51,22 @@ const cards = [{
   clickfunc: showCardInfo,
 }]
 
+const [pressed, setPressed] = useState(false);
 
 
 
   return (
     <div className="App">
-      <Header txt="Projector.io"/>
-      <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
 
-      <Cards cards={cards}
+      
+      <div style={ pressed ? {animation: "disappear", animationDuration: 1000+"ms"} : {}}>
+        <Header txt="Projector.io"/>
+        <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
 
-      />
+        <Cards setPressed={setPressed} cards={cards}
+
+        />
+      </div>
 
       
       

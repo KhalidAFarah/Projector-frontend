@@ -17,7 +17,7 @@ const Cards = (props:any) => {
                 
                 <div className="Cards row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
            {props.cards.map((card:any, index:number) => (
-               <Card key={index} img={card.img} title={card.title} txt={card.txt} clickfunc={card.clickfunc}/>
+               <Card key={index} img={card.img} title={card.title} txt={card.txt} clickfunc={card.clickfunc} setPressed={props.setPressed}/>
            ))}
            </div>
         

@@ -4,13 +4,15 @@ import { useState } from 'react';
 
 
 const Card = (props:any) => {
-    const [pressed, setPressed] = useState(false);
+    
    
-
+//style={ pressed == false ? {paddingLeft: 3+"rem", paddingRight: 3+"rem"} : {paddingLeft: 3+"rem", paddingRight: 3+"rem", transform: "scale("+100+")", transitionDuration: 1000+"ms", zIndex: 100} }
     return (
-        <div className="Card col" style={ pressed == false ? {paddingLeft: 3+"rem", paddingRight: 3+"rem"} : {paddingLeft: 3+"rem", paddingRight: 3+"rem", transform: "scale("+100+")", transitionDuration: 1000+"ms", zIndex: 100} } onClick={
+
+
+        <div className="Card col" style={{paddingLeft: 3+"rem", paddingRight: 3+"rem"}}  onClick={
             () =>{
-                setPressed(true)
+                props.setPressed(true)
                 props.clickfunc()
             }
         }>
@@ -19,8 +21,8 @@ const Card = (props:any) => {
                 <div>
                     <img src={"/images/"+props.img} alt="sup" className="card-img-top"/>
                     <div className="card-body Card-body" >
-                    { pressed == false ?                        <><h4 className="card-title text-start">{props.title}</h4>
-                        <p className="card-text text-start fs-5 p-2">{props.txt}</p></> : ""}
+                        <h4 className="card-title text-start">{props.title}</h4>
+                        <p className="card-text text-start fs-5 p-2">{props.txt}</p>
                     </div>
                     </div>
                  
