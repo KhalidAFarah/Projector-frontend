@@ -1,13 +1,21 @@
-package API
+package main
 
 import (
-	"net/http"
-	_"fmt"
-
+	"github.com/gofiber/fiber/v2"
 )
 
-func API()  {
-	
+func main(){
+	app := fiber.New()
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello ✋")
+	})
+
+	app.Get("/sup", func(c *fiber.Ctx) error {
+		return c.SendString("sup")
+	})
+
+	app.Listen(":8000")
+
 
 	
 }
