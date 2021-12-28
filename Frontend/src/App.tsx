@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Selector from './components/Selector';
 import Cards from './components/Cards';
 import Btncomponent from './components/newpage/Btncomponent';
+import RestAPIScript from './components/newpage/RestAPIScript';
+
 
 
 
@@ -36,26 +38,21 @@ const showCardInfo = () => {
 const firstbtnonclick = () => {
   setField(<Btncomponent txt="Test tekst"/>);
 }
+const RestAPIScript = () => {
+  //setField(<RestAPIScript/>);
+
+}
 const cards = [{
   img: "testimage.PNG",
   title: "LOREM IPSUM",
   txt: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
   clickfunc: firstbtnonclick,
-},{
-  img: "./testimage.PNG",
-  title: "LOREM IPSUM",
-  txt: "Lorem Ipsum. Lorem Ipsum",
-  clickfunc: showCardInfo,
-},{
-  img: "./testimage.PNG",
-  title: "LOREM IPSUM",
-  txt: "Lorem Ipsum. Lorem Ipsum",
-  clickfunc: showCardInfo,
-},{
-  img: "./testimage.PNG",
-  title: "LOREM IPSUM",
-  txt: "Lorem Ipsum. Lorem Ipsum",
-  clickfunc: showCardInfo,
+}]
+const explanations = [{
+  img: "testimage.PNG",
+  title: "Rest API",
+  txt: "The following is about Rest API with destiny 2 as an example.",
+  clickfunc: RestAPIScript,
 }]
 
 const [pressed, setPressed] = useState(false);
@@ -71,9 +68,12 @@ const [pressed, setPressed] = useState(false);
       <Header txt="Projector.io"/>
         <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
 
-        <Cards setPressed={setPressed} cards={cards}
+        <Cards link={link} class="proj" setPressed={setPressed} cards={cards} />
+        <Cards link={link} class="exp" setPressed={setPressed} cards={explanations} />
 
-        />
+        
+
+      
       </div>}
 
        
