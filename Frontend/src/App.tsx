@@ -5,8 +5,8 @@ import './App.css';
 import Header from './components/Header';
 import Selector from './components/Selector';
 import Cards from './components/Cards';
-import Btncomponent from './components/newpage/Btncomponent';
-import RestAPIScript from './components/newpage/RestAPIScript';
+import DestinyOAUTH from './pages/DestinyOAUTH';
+import RestAPIScript from './pages/RestAPIScript';
 
 
 
@@ -36,7 +36,7 @@ const showCardInfo = () => {
 
 //buttons on click
 const firstbtnonclick = () => {
-  setField(<Btncomponent txt="Test tekst"/>);
+  setField(<DestinyOAUTH/>);
 }
 const RestAPIScript = () => {
   //setField(<RestAPIScript/>);
