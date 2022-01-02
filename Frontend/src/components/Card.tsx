@@ -12,8 +12,10 @@ const Card = (props:any) => {
 
         <div className="Card col" style={{paddingLeft: 3+"rem", paddingRight: 3+"rem"}}  onClick={
             () =>{
-                props.setPressed(true)
-                props.clickfunc()
+                //props.setPressed(true)
+                
+                window.location.href = props.link; 
+                //props.clickfunc()
             }
         }>
              <div className="card h-100 border-dark" style={{transitionDuration: 0.2+"s"}}>
