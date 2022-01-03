@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+
 import Header from '../components/Header';
 import Selector from '../components/Selector';
 import Cards from '../components/Cards';
@@ -21,8 +23,18 @@ const showPrograms = () =>{
 
 //Second selector
 const showExplanations = () =>{
-  console.log("Hello showing explanations");
+  
   setLink(6);
+  /*const proj = document.querySelector(".proj");
+  const exp = document.querySelector(".exp");
+  
+  
+  if(proj != null){
+    proj.classList.add("fadeOut")
+  }
+  if(exp != null){
+    //exp.classList.add("fadeIn")
+  }*/
 }
 
 const showCardInfo = () => {
@@ -54,13 +66,21 @@ const explanations = [{
 
 const [pressed, setPressed] = useState(false);
 
+
 return (
     <div className="App">
         <div style={ pressed ? {transition: 100+"ms", opacity: 0} : {}}>
             <Header txt="Projector.io"/>
             <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
-            <Cards link={link} class="proj" setPressed={setPressed} cards={cards} />
-            <Cards link={link} class="exp" setPressed={setPressed} cards={explanations} />
+            <div>
+              <CSSTransition in={link === 3} timeout={500} classNames="menu-proj">
+                <Cards link={link} styles="proj" setPressed={setPressed} cards={cards} />
+              </CSSTransition>
+
+              <CSSTransition in={link === 6} timeout={500} classNames="menu-exp">
+                <Cards link={link} styles="exp" setPressed={setPressed} cards={explanations} />
+              </CSSTransition>
+            </div>
         </div>
     </div>
 )

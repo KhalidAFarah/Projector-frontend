@@ -115,7 +115,34 @@ code {
 
 }
 
+.menu-exp-enter{
+   transform: translateX(110%);
+}
+.menu-exp-enter-active{
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
+.menu-exp-exit{}
+.menu-exp-exit-active{
+  transform: translateX(110%);
+  transition: all 500ms ease;
+}
 
+.menu-proj-enter{
+  transform: translateX(-110%);
+
+}
+.menu-proj-enter-active{
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
+.menu-proj-exit{
+  position: absolute;
+}
+.menu-proj-exit-active{
+  transform: translateX(-110%);
+  transition: all 500 ease;
+}
 
 
 
