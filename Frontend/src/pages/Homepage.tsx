@@ -30,10 +30,10 @@ const showExplanations = () =>{
   
   
   if(proj != null){
-    proj.classList.add("fadeOut")
+    proj.classList.add("slide")
   }
   if(exp != null){
-    //exp.classList.add("fadeIn")
+    exp.classList.add("slide")
   }*/
 }
 
@@ -69,17 +69,17 @@ const [pressed, setPressed] = useState(false);
 
 return (
     <div className="App">
-        <div style={ pressed ? {transition: 100+"ms", opacity: 0} : {}}>
+        <div style={ pressed ? {transition: 100+"ms", opacity: 0,overflow:""} : {}}>
             <Header txt="Projector.io"/>
             <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
-            <div>
-              <CSSTransition in={link === 3} timeout={500} classNames="menu-proj">
-                <Cards link={link} styles="proj" setPressed={setPressed} cards={cards} />
-              </CSSTransition>
+            <div style={{overflow:"hidden"}}>
+              
+                <Cards link={link} styles="proj" style={link == 3 ? {transform: "translateX(0%)"} : {transform: "translateX(-100%)"}} setPressed={setPressed} cards={cards} />
+              
 
-              <CSSTransition in={link === 6} timeout={500} classNames="menu-exp">
-                <Cards link={link} styles="exp" setPressed={setPressed} cards={explanations} />
-              </CSSTransition>
+              
+                <Cards link={link} styles="exp" style={link == 3 ? {transform: "translateX(100%)"} : {transform: "translateX(0%)"}} setPressed={setPressed} cards={explanations} />
+              
             </div>
         </div>
     </div>

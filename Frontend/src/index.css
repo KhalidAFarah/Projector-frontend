@@ -21,6 +21,22 @@ html{
   background-color: var(--black);
 }
 
+/* animation makes the page appear rather than pop in*/
+.App{
+  animation: appear;
+  animation-duration: 500ms;
+  width: 100%;
+  height: auto;
+}
+@keyframes appear {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -113,6 +129,19 @@ code {
 
 .btn-box{
 
+}
+
+.exp, .proj{
+  
+  width: 100%;
+  transition: all 500ms ease;
+}
+
+.exp{
+  position: relative;
+}
+.proj{
+  position: absolute;
 }
 
 .menu-exp-enter{
