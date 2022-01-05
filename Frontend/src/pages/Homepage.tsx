@@ -44,7 +44,7 @@ const showCardInfo = () => {
 
 //buttons on click
 const firstbtnonclick = () => {
-  setField(<DestinyOAUTH/>);
+  //setField(<DestinyOAUTH/>);
 }
 const RestAPIScript = () => {
   //setField(<RestAPIScript/>);
@@ -62,6 +62,7 @@ const explanations = [{
   title: "Rest API",
   txt: "The following is about Rest API with destiny 2 as an example.",
   clickfunc: RestAPIScript,
+  link: "restapiscript"
 }]
 
 const [pressed, setPressed] = useState(false);

@@ -1,4 +1,4 @@
-import Btn from "../components/Btn"
+import Btn from "../components/Button"
 const DestinyOAUTH = (props:any) => {
     const authorizeOnClick = () => {
         
