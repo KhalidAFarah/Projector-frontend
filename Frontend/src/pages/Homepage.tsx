@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { SyntheticEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import Header from '../components/Header';
@@ -12,8 +12,33 @@ import RestAPIScript from '../pages/RestAPIScript';
 
 const Homepage = () => {
 
-    const [link, setLink] = useState(3);
-  const [field, setField] = useState(<></>);
+  const [link, setLink] = useState(3);
+  const [active ,setActive] = useState(false);
+
+  
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:8000/sup", {
+        method: 'GET',
+        headers: {'Content-Type':'application/json'}
+      }).then(response => {
+        console.log("sd")
+        if(response.ok){
+          
+          return response.json();
+        }
+        throw response
+        
+      }).then(data => {
+        console.log(data);
+      }).catch( error => {
+        console.log("Unable to fecth from backend");
+      })
+      
+    })()
+  }, []);
+  ;
 
 //First selector
 const showPrograms = () =>{
@@ -36,6 +61,8 @@ const showExplanations = () =>{
     exp.classList.add("slide")
   }*/
 }
+
+
 
 const showCardInfo = () => {
   console.log("you pressed a card, wow!");
@@ -76,9 +103,6 @@ return (
             <div style={{overflow:"hidden"}}>
               
                 <Cards link={link} styles="proj" style={link == 3 ? {transform: "translateX(0%)"} : {transform: "translateX(-100%)"}} setPressed={setPressed} cards={cards} />
-              
-
-              
                 <Cards link={link} styles="exp" style={link == 3 ? {transform: "translateX(100%)"} : {transform: "translateX(0%)"}} setPressed={setPressed} cards={explanations} />
               
             </div>

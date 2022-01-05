@@ -5,7 +5,7 @@ const TextHeader = (props:any) => {
          classes += props.classes;
     }
     return (
-        <p className={classes} style={{marginTop:"5rem"}}>{props.txt}</p>
+        <p tabIndex={0} className={classes} style={{marginTop:"5rem"}}>{props.txt}</p>
     )
 }
 

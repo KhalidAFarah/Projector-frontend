@@ -6,7 +6,7 @@ const Text = (props:any) => {
     }
     
     return (
-        <p className={classes} style={{marginTop: "2rem", marginBottom:"2rem"}}>{props.txt}</p>
+        <p tabIndex={0} className={classes} style={{marginTop: "2rem", marginBottom:"2rem"}}>{props.txt}</p>
     )
 }
 
