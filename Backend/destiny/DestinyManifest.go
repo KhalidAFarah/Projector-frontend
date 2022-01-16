@@ -2121,9 +2121,9 @@ func main() {
 	json.Unmarshal(body2, &manifest)
 
 	//writting the data to a zip file
-	file, error := os.Create("Manifest/manifest.zip")
+	file, error := os.Create("./Manifest/manifest.zip")
 	if error != nil {
-		panic("err7")
+		panic(error)
 	}
 
 	defer file.Close()
@@ -2131,14 +2131,7 @@ func main() {
 	file.WriteString(string(body2))
 
 	//extracting it to the a manifest.content file for comucating with sqlite.
-	/*extracted, error := zip.OpenReader(file)
-	if error != nil {
-		panic("err8")
-	}
-
-	defer extracted.Close()*/
 	fmt.Println("------Extracting to sqlite------")
-	//Unzip("Manifest/manifest.zip", "Manifest/manifest.content")
 
 	resp, err := zip.OpenReader("Manifest/manifest.zip")
 	if err != nil {
@@ -2148,100 +2141,41 @@ func main() {
 	os.MkdirAll("Manifest", 0755)
 
 	for _, file := range resp.File {
-		r, err := file.Open()
-		if err != nil {
-			panic(err)
-		}
 
-		er := r.Close()
-		if er != nil {
-			panic("err9")
+		f, err := file.Open()
+		if err != nil {
+			panic("Unable to open file")
 		}
+		defer func() {
+			err := f.Close()
+			if err != nil {
+				panic("Unable to close file")
+			}
+		}()
+
 		path := filepath.Join("Manifest", file.Name)
 
-		os.MkdirAll(filepath.Dir(path), file.Mode())
-		f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
-		if err != nil {
-			panic("err10")
-		}
-		defer func() {
-			if err := f.Close(); err != nil {
-				panic("err11")
-			}
-		}()
-		_, err = io.Copy(f, r)
-		if err != nil {
-			panic(err)
-		}
-	}
-	err10101 := resp.Close()
-	if err10101 != nil {
-		panic("Unable to close zip")
-	}
-
-}
-
-/*func Unzip(src, dest string) error {
-	r, err := zip.OpenReader(src)
-	if err != nil {
-		return err
-
-	}
-	defer func() {
-		if err := r.Close(); err != nil {
-			panic(err)
-		}
-	}()
-
-	os.MkdirAll(dest, 0755)
-
-	// Closure to address file descriptors issue with all the deferred .Close() methods
-	extractAndWriteFile := func(f *zip.File) error {
-		rc, err := f.Open()
-		if err != nil {
-			return err
-		}
-		defer func() {
-			if err := rc.Close(); err != nil {
-				panic(err)
-			}
-		}()
-
-		path := filepath.Join(dest, f.Name)
-
-		// Check for ZipSlip (Directory traversal)
-		if !strings.HasPrefix(path, filepath.Clean(dest)+string(os.PathSeparator)) {
-			return fmt.Errorf("illegal file path: %s", path)
-		}
-
-		if f.FileInfo().IsDir() {
-			os.MkdirAll(path, f.Mode())
+		if file.FileInfo().IsDir() {
+			os.MkdirAll(path, file.Mode())
 		} else {
-			os.MkdirAll(filepath.Dir(path), f.Mode())
-			f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
+			os.MkdirAll(filepath.Dir(path), file.Mode())
+			fs, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
+
 			if err != nil {
-				return err
+				panic("Unable to open the file")
 			}
+
 			defer func() {
-				if err := f.Close(); err != nil {
-					panic(err)
+				err := f.Close()
+				if err != nil {
+					panic("Unable to close the file")
 				}
 			}()
 
-			_, err = io.Copy(f, rc)
+			_, err = io.Copy(fs, f)
 			if err != nil {
-				return err
+				panic("Unable to copy data")
 			}
 		}
-		return nil
 	}
-
-	for _, f := range r.File {
-		err := extractAndWriteFile(f)
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
-}*/
+}
