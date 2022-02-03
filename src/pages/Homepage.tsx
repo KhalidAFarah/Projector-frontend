@@ -98,7 +98,7 @@ const [pressed, setPressed] = useState(false);
 return (
     <div className="App">
         <div style={ pressed ? {transition: 100+"ms", opacity: 0,overflow:""} : {}}>
-            <Header txt="Projector.io"/>
+            <Header txt="Proteje.netlify.app"/>
             <Selector txtbtn1="Show programs" txtbtn2="Show explanations" func1={showPrograms} func2={showExplanations} link={link}/>
             <div style={{overflow:"hidden"}}>
               
