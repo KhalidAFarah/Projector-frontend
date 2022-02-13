@@ -16,13 +16,13 @@ const DestinyOAUTH = (props:any) => {
                 const info = {
                     'client_id': '39222',
                     'grant_type': 'authorization_code',
-                    'code' : code,
+                    'code' : code
                 }
-                const response = await fetch("https://www.bungie.net/Platform/App/OAuth/Token/", {
+
+                await fetch("https://www.bungie.net/Platform/App/OAuth/Token/", {
                     method: 'POST',
-                    headers: {'Content-Type':'application/x-www-form-urlencoded;',
-                       },
-                    body: JSON.stringify(info),
+                    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams(info)
                 }).then(response => {
                     if(response.ok){
                         return response.json();
