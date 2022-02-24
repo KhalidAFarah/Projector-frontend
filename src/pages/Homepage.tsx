@@ -19,7 +19,7 @@ const Homepage = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("https://proteje.herokuapp.com/api/sup/", {
+      const response = await fetch("/api/sup/", {
         method: 'GET',
         headers: {
           'Content-Type':'application/json',
