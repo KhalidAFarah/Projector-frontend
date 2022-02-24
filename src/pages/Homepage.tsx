@@ -19,9 +19,13 @@ const Homepage = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("https://proteje.herokuapp.com/api/sup", {
+      const response = await fetch("https://proteje.herokuapp.com/api/sup/", {
         method: 'GET',
-        headers: {'Content-Type':'application/json'}
+        headers: {
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin':"*"
+          
+        }
       }).then(response => {
         console.log("sd")
         if(response.ok){
