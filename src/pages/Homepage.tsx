@@ -81,13 +81,24 @@ const RestAPIScript = () => {
   //setField(<RestAPIScript/>);
 
 }
-const cards = [{
-  img: "testimage.PNG",
-  title: "LOREM IPSUM",
-  txt: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-  clickfunc: firstbtnonclick,
-  link: "/destinyoauth"
-}]
+const cards = [
+  {
+    img: "testimage.PNG",
+    title: "LOREM IPSUM",
+    txt: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    clickfunc: firstbtnonclick,
+    link: "/destinyoauth"
+  },
+  {
+    img: "testimage.PNG",
+    title: "Youtube video countdown",
+    txt: "Set a counter on a youtube video's title",
+    clickfunc: firstbtnonclick,
+    link: "/ytcountdown"
+  }
+]
+
+
 const explanations = [{
   img: "testimage.PNG",
   title: "Rest API",

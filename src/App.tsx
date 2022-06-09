@@ -6,6 +6,7 @@ import './App.css';
 import Homepage from './pages/Homepage';
 import DestinyOAUTH from './pages/DestinyOAUTH';
 import RestAPIScript from './pages/RestAPIScript';
+import YoutubeTitleCountdown from './pages/YoutubeTitleCountdown';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Route path="/" exact component={Homepage}/>
       <Route path="/destinyoauth" component={DestinyOAUTH} />
+      <Route path="/ytcountdown" component={YoutubeTitleCountdown} />
       <Route path="/restapiscript" component={RestAPIScript} />
     </Router>
   );
