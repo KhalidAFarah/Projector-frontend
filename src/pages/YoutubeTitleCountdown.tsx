@@ -67,20 +67,65 @@ interface User {
 
 const YoutubeTitleCountdown = () => {
   useEffect(() => {
-    function start(){
+    //On load, called to load the auth2 library and API client library.
+    gapi.load('client:auth2', initClient);
+    
+    // Initialize the API client library
+    function initClient() {
       gapi.client.init({
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
         clientId: process.env.REACT_APP_YT_CLIENT_ID,
-        scope: "https://www.googleapis.com/auth/youtube.force-ssl"
-      })
+        scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl'
+      }).then(function () {
+        // do stuff with loaded APIs
+        console.log('it worked');
+
+      });
     }
 
-    gapi.load('client:auth2')
-  })
+
+    
+
+  }, [])
 
 
   const [user, setUser] = useState<User | null>(null);
   const onSuccess = async (res: any) => {
     console.log(res)
+
+    console.log(gapi)
+    console.log(gapi.client.drive.channels)
+    console.log("-"+res.tokenObj.token_type + ' ' + res.tokenObj.access_token+"-")
+    const payload:any = {
+      part: "contentDetails",
+      mine: true,
+      key: process.env.REACT_APP_YT_API_KEY
+    }
+
+    fetch("https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&mine=true&key="+process.env.REACT_APP_YT_API_KEY,{
+      method: "GET",
+      'mode':'no-cors',
+      headers: {
+        Authorization: res.tokenObj.token_type + ' ' + res.tokenObj.access_token,
+        Accept: 'application/json',
+      }
+    }).then( (data) => {
+      console.log("--------")
+      console.log(data)
+    })
+
+
+
+    /*fetch("http://localhost:9200/api/youtube/videos/"+res.accessToken+"/",  {
+      mode: 'cors',
+    }).then((response) => {
+      if(response.ok){
+        return response.json();
+      }
+      throw response
+    }).then((data) => {
+      console.log(data)
+    })*/
     /*try {
       const result: AxiosResponse<AuthResponse> = await axios.post("/auth/", {
         token: res?.tokenId,

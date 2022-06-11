@@ -8,7 +8,7 @@ const Selector = (props:any) => {
         </div>
 
         <div className="row">
-            <span className={props.link == 3 ? "underscore col-3 offset-3" : "underscore col-3 offset-6" }></span>
+            <span className={props.link == 3 ? "underscore lg-col-3 md-col-3 sm-col-3 offset-3" : "underscore lg-col-3 md-col-3 sm-col-3 offset-6" }></span>
         </div>
         </div>
         
