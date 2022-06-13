@@ -2,6 +2,7 @@
 
 import { gapi } from "gapi-script";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import GoogleLogin from "react-google-login";
 
 interface AuthResponse {
@@ -29,7 +30,7 @@ const YoutubeTitleCountdown = () => {
         scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl'
       }).then(function () {
         // do stuff with loaded APIs
-        console.log('it worked');
+        //console.log('it worked');
 
       });
     }
@@ -40,72 +41,68 @@ const YoutubeTitleCountdown = () => {
   }, [])
 
 
-  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState("");
+  const [next, setNext] = useState("");
   const onSuccess = async (res: any) => {
-    console.log(res)
+    setToken(res.tokenObj.access_token)
+    //console.log(res)
 
-    console.log("-"+res.tokenObj.token_type + ' ' + res.tokenObj.access_token+"-")
+    //console.log("-"+res.tokenObj.token_type + ' ' + res.tokenObj.access_token+"-")
     
 
-    await fetch("localhost:9200/api/youtube?token="+res.tokenObj.access_token,{
-      method: "GET",
-      credentials: 'include',
+    fetch("/api/youtube/?token="+res.tokenObj.access_token,{
+    
       headers: {
-        'Access-Control-Allow-Origins': '*',
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': res.tokenObj.token_type + ' ' + res.tokenObj.access_token
       }
-    }).then((response) => {
-      if(response.ok){
-        return response.json;
-      }
-      throw response;
-    }).then( (data) => {
-      console.log("--------")
-      console.log(data)
-    })
-
-
-
-    /*fetch("http://localhost:9200/api/youtube/videos/"+res.accessToken+"/",  {
-      mode: 'cors',
     }).then((response) => {
       if(response.ok){
         return response.json();
       }
-      throw response
-    }).then((data) => {
+      throw response;
+    }).then( (data) => {
       console.log(data)
-    })*/
-    /*try {
-      const result: AxiosResponse<AuthResponse> = await axios.post("/auth/", {
-        token: res?.tokenId,
-      });
 
-      setUser(result.data.user);
-    } catch (err) {
-      console.log(err);
-    }*/
+      setNext(data.nextPageToken)
+    }).catch((error) => {
+      console.log(error)
+    })
   };
 
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col">
-      {!user && (
+      
         <GoogleLogin
           clientId={`${process.env.REACT_APP_YT_CLIENT_ID}`}
           onSuccess={onSuccess}
         />
+      
+
+      {token != "" && (
+        <Button variant="primary" onClick={()=>{
+          if(next != "") {
+            fetch("/api/youtube/?token="+token+"&next="+next,{
+    
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              }
+            }).then((response) => {
+              if(response.ok){
+                return response.json();
+              }
+              throw response;
+            }).then( (data) => {
+              console.log(data)
+            }).catch((error) => {
+              console.log(error)
+            })
+          }
+        }}>Show more</Button>
       )}
 
-      {user && (
-        <>
-          <img src={user.avatar} className="rounded-full" />
-          <h1 className="text-xl font-semibold text-center my-5">
-            {user.name}
-          </h1>
-        </>
-      )}
+      
     </div>
   );
 };
