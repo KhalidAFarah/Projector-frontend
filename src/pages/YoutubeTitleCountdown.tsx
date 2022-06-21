@@ -4,7 +4,6 @@ import { gapi } from "gapi-script";
 import { useEffect, useState } from "react";
 import { Button, Form, Row, Card, Col, Container, CardGroup } from "react-bootstrap";
 import GoogleLogin from "react-google-login";
-import { isArray } from "util";
 
 interface AuthResponse {
   token: string;
@@ -42,8 +41,9 @@ const YoutubeTitleCountdown = () => {
   }, [])
 
 
+
   const [token, setToken] = useState("");
-  const [next, setNext] = useState("");
+  const [next, setNext] = useState(null);
 
   const def:any[] = []
   const [videos, setVideos] = useState(def);
@@ -152,7 +152,7 @@ const YoutubeTitleCountdown = () => {
         <Col>
           {token != "" && (
             <Button variant="primary" onClick={()=>{
-              if(next != "") {
+              if(next != null) {
                 fetch("/api/youtube/?token="+token+"&next="+next,{
         
                   headers: {
@@ -165,7 +165,14 @@ const YoutubeTitleCountdown = () => {
                   }
                   throw response;
                 }).then( (data) => {
-                  console.log(data)
+                  let tmp = videos
+                  for(let vid of data.items){
+                    tmp = [...tmp, vid]
+                  }
+                  setVideos(tmp);
+                  setShownVideos(tmp);
+
+                  setNext(data.nextPageToken)
                 }).catch((error) => {
                   console.log(error)
                 })
