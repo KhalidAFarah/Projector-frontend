@@ -46,8 +46,8 @@ const YoutubeTitleCountdown = () => {
   const [next, setNext] = useState("");
 
   const def:any[] = []
-  const [videos, setVideos] = useState([]);
-  const [shownVideos, setShownVideos] = useState([]);
+  const [videos, setVideos] = useState(def);
+  const [shownVideos, setShownVideos] = useState(def);
   const [chosen, setChosen] = useState(def);
 
   const [hour, setHour] = useState(0);
@@ -82,6 +82,57 @@ const YoutubeTitleCountdown = () => {
       console.log(error)
     })
   };
+
+  const cardclick = (video:any)=> {
+       
+    const elem:any = document.getElementById(video.id);
+    console.log(chosen)
+    
+   
+
+    if(elem.style.border == ""){
+      elem.style.border = "solid #0d6efd 0.2rem";
+      setChosen([...chosen, video]);
+    }else{
+      elem.style.border = "";
+      const t = chosen.filter((element) => element != video);
+      setChosen(t);
+    }
+      
+
+    //console.log(chosen)
+
+
+  }
+  
+
+  const card = (video:any) => {
+
+    
+    let styles:any = { width: '18rem', margin: "1rem" }
+
+    for(let i = 0; i < chosen.length; i++){
+     if(chosen[i].id == video.id){
+      styles = { width: '18rem', margin: "1rem", border: "solid #0d6efd 0.2rem" };
+      break
+     } 
+    }
+    
+
+    return (
+      <Card id={video.id} onClick={()=>{cardclick(video)}} style={styles} >
+            <Card.Img variant="top" src={video.snippet.thumbnails.medium.url} />
+            <Card.Body>
+              <Card.Title>{video.snippet.title}</Card.Title>
+              <Card.Text>
+                
+              </Card.Text>
+              
+            </Card.Body>
+          </Card>
+    )
+  }
+  
 
   return (
   <Container fluid>
@@ -197,40 +248,11 @@ const YoutubeTitleCountdown = () => {
 
       
       {shownVideos.map((video:any, index:number) => (
-        <Col>
+        <Col key={index}>
 
+          {card(video)}
           
-        <Card id={"vidId-" + index} onClick={(e:any)=> {
-       
-          const elem:any = document.getElementById("vidId-" + index);
-          console.log(e.target.className)
-          
-         
-
-          if(elem.style.border == ""){
-            elem.style.border = "solid #0d6efd 0.1rem";
-            setChosen([...chosen, video]);
-          }else{
-            elem.style.border = "";
-            const t = chosen.filter((element) => element != video);
-            console.log(t)
-            setChosen(t);
-          }
-            
-
-          //console.log(chosen)
-
-
-        }}  key={index} style={{ width: '18rem', margin: "1rem" }} >
-          <Card.Img variant="top" src={video.snippet.thumbnails.medium.url} />
-          <Card.Body>
-            <Card.Title>{video.snippet.title}</Card.Title>
-            <Card.Text>
-              
-            </Card.Text>
-            
-          </Card.Body>
-        </Card></Col>
+        </Col>
       ))}
       </Row>
       </Col>
