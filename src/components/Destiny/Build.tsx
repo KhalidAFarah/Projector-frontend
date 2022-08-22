@@ -1,8 +1,10 @@
-import { Container, Row, Col, Image } from "react-bootstrap"
+import { Container, Row, Col, Image, Card } from "react-bootstrap"
 
 interface args {
   image:string;
   name:string;
+
+  subclass:any;
 
   kinetic:any;
   energy:any;
@@ -16,59 +18,72 @@ interface args {
 
 }
 
-const Build = (props:args) => {
+const Build = (props:any) => {
 
   let displayable:args = {
-    image: props.image,
-    name: props.name, 
+    image: '/images/lazer_tag_guardian.png',//props.build.image,
+    name: props.build.name, 
 
-    kinetic: props.kinetic || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    energy: props.energy || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    heavy: props.heavy || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    subclass: "https://www.bungie.net"+props.build.subclass.item.displayProperties.icon,
 
-    helmet: props.helmet || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    gauntlets: props.gauntlets || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    chest_armor: props.chest_armor || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    leg_armor: props.leg_armor || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
-    class_armor: props.class_armor || "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png"
+    kinetic: props.build.kinetic.item != null ? "https://www.bungie.net"+ props.build.kinetic.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    energy: props.build.energy.item != null ? "https://www.bungie.net"+props.build.energy.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    heavy: props.build.heavy.item != null ? "https://www.bungie.net"+props.build.heavy.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+
+    helmet: props.build.helmet.item != null ? "https://www.bungie.net"+props.build.helmet.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    gauntlets: props.build.gauntlets.item != null ? "https://www.bungie.net"+props.build.gauntlets.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    chest_armor: props.build.chest_armor.item != null ? "https://www.bungie.net"+props.build.chest_armor.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    leg_armor: props.build.leg_armor.item != null ? "https://www.bungie.net"+props.build.leg_armor.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png",
+    class_armor: props.build.class_armor.item != null ? "https://www.bungie.net"+props.build.class_armor.item.displayProperties.icon : "https://www.bungie.net/common/destiny2_content/icons/4d19ce623e24b54f5cff385baed7d7fd.png"
   };
 
 
   return (
-    <Container fluid style={{backgroundColor:"#333333"}}>
-      <Image style={{opacity: "50%"}} src={props.image} />
+    <Col>
+    <Card style={{backgroundColor:"#333333"}}>
+    <Image style={{opacity: "50%", width: "100%"}} src={displayable.image} />
       <Container style={{position: "absolute", top:"2%"}}>
         <Row>
-          <Col style={{paddingLeft: "25%" , paddingTop:"30%"}}>
+          <Col sm={3} md={3} lg={3} style={{paddingLeft: "5%" , paddingTop:"20%"}}>
 
             <Row >
-              <Image  src={displayable.kinetic}></Image>
+              <Image style={{width:"100%"}}  src={displayable.subclass}></Image>
             </Row>
             <Row style={{marginTop: "30%"}}>
-              <Image src={displayable.kinetic}></Image>
+              <Image style={{width:"100%"}} src={displayable.kinetic}></Image>
             </Row>
             <Row>
-              <Image src={displayable.energy}></Image>
+              <Image style={{width:"100%"}} src={displayable.energy}></Image>
             </Row>
             <Row>
-              <Image src={displayable.heavy}></Image>
+              <Image style={{width:"100%"}} src={displayable.heavy}></Image>
             </Row>
+          </Col >
 
-
-            
-
-
-          </Col>
-
-          <Col>
-          
+          <Col sm={{span:3, offset:6}} md={{span:3, offset:6}} lg={{span:3, offset:6}} style={{paddingLeft: "5%" , paddingTop:"20%"}}>
+          <Row >
+              <Image style={{width:"100%"}}  src={displayable.helmet}></Image>
+            </Row>
+            <Row>
+              <Image style={{width:"100%"}} src={displayable.gauntlets}></Image>
+            </Row>
+            <Row>
+              <Image style={{width:"100%"}} src={displayable.chest_armor}></Image>
+            </Row>
+            <Row>
+              <Image style={{width:"100%"}} src={displayable.leg_armor}></Image>
+            </Row>
+            <Row>
+              <Image style={{width:"100%"}} src={displayable.class_armor}></Image>
+            </Row>
           </Col>
         </Row>
         
       </Container>
       
-    </Container>
+    </Card>
+    </Col>
   )
 }
 
-export default Build
+export { Build }

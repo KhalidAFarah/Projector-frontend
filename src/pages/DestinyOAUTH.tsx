@@ -1,7 +1,9 @@
 import Btn from "../components/Button"
-import { useEffect } from "react"
+import { useEffect, useState} from "react"
+import { Builds } from "../components/Destiny"
 //import { Buttton } from "react-bootstrap/button";
 const DestinyOAUTH = (props:any) => {
+    const [builds, setBuilds] = useState({})
     
     const authorizeOnClick = () => {
         window.location.href = "https://www.bungie.net/en/OAuth/Authorize?client_id=39222&response_type=code"
@@ -9,6 +11,16 @@ const DestinyOAUTH = (props:any) => {
 
     useEffect(() => {
         (async () => {
+            
+            await fetch("http://localhost:9200/api/destiny/builds/").then((response)=>{
+                if(response.ok){
+                    return response.json()
+                } throw response
+            }).then(data => {
+                setBuilds(data)
+            }).catch((error) => {
+                console.log(error)
+            })
 
             const code = window.location.search.replace("?code=", "");
 
@@ -48,6 +60,7 @@ client_id={client-id}&grant_type=authorization_code&code={auth-code}
     return (
         <div className="App">
             <Btn txt="Authorize" onClick={authorizeOnClick}/>
+            <Builds builds={builds}/>
         </div>
     )
 }
