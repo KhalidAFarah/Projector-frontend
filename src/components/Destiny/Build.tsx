@@ -40,20 +40,20 @@ const Build = (props:any) => {
 
   return (
     <Col>
-    <Card style={{backgroundColor:"#333333"}}>
+    <Card style={{backgroundColor:"#333333", margin: "10%", border: "solid black .2em"}}>
     <Image style={{opacity: "50%", width: "100%"}} src={displayable.image} />
       <Container style={{position: "absolute", top:"2%"}}>
         <Row>
           <Col sm={3} md={3} lg={3} style={{paddingLeft: "5%" , paddingTop:"20%"}}>
 
             <Row >
-              <Image style={{width:"100%"}}  src={displayable.subclass}></Image>
+              <Image style={{width:"100%", margin:"15%"}}  src={displayable.subclass}></Image>
             </Row>
-            <Row style={{marginTop: "30%"}}>
+            <Row style={{marginTop: "30%", marginBottom: "15%"}}>
               <Image style={{width:"100%"}} src={displayable.kinetic}></Image>
             </Row>
             <Row>
-              <Image style={{width:"100%"}} src={displayable.energy}></Image>
+              <Image style={{width:"100%", marginBottom: "15%"}} src={displayable.energy}></Image>
             </Row>
             <Row>
               <Image style={{width:"100%"}} src={displayable.heavy}></Image>
@@ -62,16 +62,16 @@ const Build = (props:any) => {
 
           <Col sm={{span:3, offset:6}} md={{span:3, offset:6}} lg={{span:3, offset:6}} style={{paddingLeft: "5%" , paddingTop:"20%"}}>
           <Row >
-              <Image style={{width:"100%"}}  src={displayable.helmet}></Image>
+              <Image style={{width:"100%", marginBottom:"5%"}}  src={displayable.helmet}></Image>
             </Row>
             <Row>
-              <Image style={{width:"100%"}} src={displayable.gauntlets}></Image>
+              <Image style={{width:"100%", marginBottom:"5%"}} src={displayable.gauntlets}></Image>
             </Row>
             <Row>
-              <Image style={{width:"100%"}} src={displayable.chest_armor}></Image>
+              <Image style={{width:"100%", marginBottom:"5%"}} src={displayable.chest_armor}></Image>
             </Row>
             <Row>
-              <Image style={{width:"100%"}} src={displayable.leg_armor}></Image>
+              <Image style={{width:"100%", marginBottom:"5%"}} src={displayable.leg_armor}></Image>
             </Row>
             <Row>
               <Image style={{width:"100%"}} src={displayable.class_armor}></Image>

@@ -11,7 +11,7 @@ const Builds = (props:any) => {
         }
     }
     return (
-        <Row className="g-3">
+        <Row style={{marginLeft: "10%", marginRight: "10%"}} className="g-3">
             {generate()}
         </Row>
     )
