@@ -27,7 +27,9 @@ const YoutubeTitleCountdown = () => {
       gapi.client.init({
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
         clientId: process.env.REACT_APP_YT_CLIENT_ID,
+        access_type: 'offline',
         scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl'
+        
       }).then(function () {
         // do stuff with loaded APIs
         //console.log('it worked');
@@ -45,17 +47,18 @@ const YoutubeTitleCountdown = () => {
   const [token, setToken] = useState("");
   const [next, setNext] = useState(null);
 
-  const def:any[] = []
+  const def:any[] = [];
   const [videos, setVideos] = useState(def);
   const [shownVideos, setShownVideos] = useState(def);
   const [chosen, setChosen] = useState(def);
 
+  const [displaytext, setDisplaytext] = useState("");
   const [hour, setHour] = useState(0);
   const [min, setMin] = useState(0);
 
-  const onSuccess = async (res: any) => {
+  const onSuccess = async (res: any) => {console.log(res)
     setToken(res.tokenObj.access_token)
-    //console.log(res)
+    
 
     //console.log("-"+res.tokenObj.token_type + ' ' + res.tokenObj.access_token+"-")
     
@@ -146,6 +149,8 @@ const YoutubeTitleCountdown = () => {
           <GoogleLogin
             clientId={`${process.env.REACT_APP_YT_CLIENT_ID}`}
             onSuccess={onSuccess}
+            accessType='offline'
+            responseType="code"
           />
         </Col>
 
@@ -173,7 +178,7 @@ const YoutubeTitleCountdown = () => {
                   setShownVideos(tmp);
 
                   setNext(data.nextPageToken)
-                }).catch((error) => {
+                }).catch((error:any) => {
                   console.log(error)
                 })
               }
@@ -189,7 +194,9 @@ const YoutubeTitleCountdown = () => {
 
     <Row>
       <Col>
-      <Form.Control type="text"  placeholder="Displayed text with '-x-' as the time "/>
+      <Form.Control type="text"  placeholder="Displayed text with '-x-' as the time" onChange={(e:any) => {
+        setDisplaytext(e.target.value)
+      }}/>
       </Col>
     </Row>
     <br/>
@@ -213,23 +220,38 @@ const YoutubeTitleCountdown = () => {
     <Row>
       <Col>
           <Button variant="primary" onClick={() => {
-            fetch("/api/youtube/?hour="+hour+"&min="+min,{
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-              },
-              body: JSON.stringify(chosen)
-            }).then((response) => {
-              if(response.ok){
-                return response.json();
+
+            for(let video of chosen){
+              let videoInfo = {
+                id: video.id,
+                snippet: {
+                  title: video.snippet.title,
+                  //categoryId: video.snippet.,
+                  description: video.snippet.description,
+                  //tags: ["live"]
+                }
               }
-              throw response;
-            }).then( (data) => {
-              console.log(data)
-            }).catch((error) => {
-              console.log(error)
-            })
+
+              fetch("/api/youtube/?token="+token+"&displaytext="+displaytext+"&hour="+hour+"&min="+min,{
+                method: "PUT",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify(video)
+              })
+              /*.then((response) => {
+                if(response.ok){
+                  return response.json();
+                }
+                throw response;
+              }).then( (data) => {
+                console.log(data)
+              })*/
+              .catch((error) => {
+                console.log(error)
+              })
+            }
           }}>Submit</Button>
       </Col>
     </Row>
